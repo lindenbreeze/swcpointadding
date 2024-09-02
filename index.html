@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- 
+      This is an HTML comment
+      You can write text in a comment and the content won't be visible in the page
+    -->
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon"
+    href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHlcmASZgNOAA0mtIwob78oSLwGP1PybjDQ&s" />
+
+  <!--
+      This is the page head - it contains info the browser uses
+      Like the title, which appears on the browser tab but not inside the page
+      Further down you'll see the content that displays in the page
+    -->
+  <title>SWC Point Adding</title>
+
+</head>
+
+<body>
+  <table>
+    <td>
+      <div id="inputarea" class="area">
+        <p>Enter comments API info:</p>
+        <textarea id="input" rows="10""></textarea><br>
+        <button id=" go" onclick="go()">GO</button>
+    </div><br>
+    <div id="outputarea" class="area">
+        <textarea id="output" readonly rows="10"></textarea><br>
+        <button id="copy" onclick="copy()"">COPY</button>
+
+      </div>
+      </div>
+    </td>
+    <td>
+      <p>Cabin Aliases:</p>
+      <textarea rows=" 10" id="cabin_nicknames">{
+          "action": "action",
+          "adventure": "adventure",
+          "adv": "adventure",
+          "bizarro": "bizarro",
+          "bifi": "bizarro",
+          "bi-fi": "bizarro",
+          "bi_fi": "bizarro",
+          "bizarro-fiction": "bizarro",
+          "bizarrofiction": "bizarro",
+          "bizarro_fiction": "bizarro",
+          "comedy": "comedy",
+          "contemporary": "contemporary",
+          "contemp": "contemporary",
+          "contempt": "contemporary",
+          "dystopian": "dystopian",
+          "dystopain": "dystopian",
+          "dystopia": "dystopian",
+          "epistolary": "epistolary",
+          "epistloary": "epistolary",
+          "epistoalry": "epistolary",
+          "fairytales": "fairytales",
+          "fairy-tales": "fairytales",
+          "fairytale": "fairytales",
+          "fairy-tale": "fairytales",
+          "fairy_tales": "fairytales",
+          "fairy_tale": "fairytales",
+          "folklore": "folklore",
+          "fantasy": "fantasy",
+          "fanfi": "fanfi",
+          "fanfic": "fanfi",
+          "fan-fi": "fanfi",
+          "fanfiction": "fanfi",
+          "fan-fiction": "fanfi",
+          "fan_fiction": "fanfi",
+          "fan_fi": "fanfi",
+          "fan-fic": "fanfi",
+          "fan_fic": "fanfi",
+          "gothic": "gothic",
+          "goth": "gothic",
+          "historicalfiction": "hifi",
+          "hifi": "hifi",
+          "hi-fi": "hifi",
+          "historical-fiction": "hifi",
+          "historical_fiction": "hifi",
+          "hi_fi": "hifi",
+          "horror": "horror",
+          "illufi": "illufi",
+          "illu-fi": "illufi",
+          "illu_fi": "illufi",
+          "illu": "illufi",
+          "illustratedfi": "illufi",
+          "illustrated-fi": "illufi",
+          "illustrated_fi": "illufi",
+          "illustratedfiction": "illufi",
+          "illustrated-fiction": "illufi",
+          "illustrated_fiction": "illufi",
+          "litfi": "litfi",
+          "lit-fi": "litfi",
+          "lit_fi": "litfi",
+          "literaryfi": "litfi",
+          "literary-fi": "litfi",
+          "literary_fi": "litfi",
+          "literaryfiction": "litfi",
+          "literary-fiction": "litfi",
+          "literary_fiction": "litfi",
+          "literary": "litfi",
+          "lyric": "lyric",
+          "mystery": "mystery",
+          "myth": "myth",
+          "mythology": "myth",
+          "nonfi": "nonfi",
+          "non-fi": "nonfi",
+          "non_fi": "nonfi",
+          "nonfiction": "nonfi",
+          "non-fiction": "nonfi",
+          "non_fiction": "nonfi",
+          "nonfic": "nonfi",
+          "non-fic": "nonfi",
+          "non_fic": "nonfi",
+          "poetry": "poetry",
+          "poem": "poetry",
+          "realfi": "realfi",
+          "real-fi": "realfi",
+          "real_fi": "realfi",
+          "realisticfiction": "realfi",
+          "realistic-fiction": "realfi",
+          "realistic_fiction": "realfi",
+          "realistic": "realfi",
+          "scifi": "scifi",
+          "sci-fi": "scifi",
+          "sci_fi": "scifi",
+          "sciencefiction": "scifi",
+          "science-fiction": "scifi",
+          "science_fiction": "scifi",
+          "script": "script",
+          "steampunk": "steampunk",
+          "solarpunk": "solarpunk",
+          "thriller": "thriller",
+          "tragedy": "tragedy",
+          "utopian": "utopian",
+          "testcabin": "testcabin"
+          }</textarea><br>
+          <p>Point adders</p>
+          <textarea rows="10" id="point_adders">["honeybreeze", "-redredrobin-", "pepper-and-a-pencil"]</textarea>
+
+    </td>
+  </table>
+</body>
+
+</html>
+<style>
+  table {
+    width: 90%;
+  }
+
+
+  textarea {
+    width: 90%;
+  }
+
+  #left {
+    background-color: lightgray;
+  }
+
+  #right {
+    background-color: lightslategray;
+  }
+</style>
+<script>
+  function isNumeric(n) {
+    if (n * 1 == n) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  let project_id = "551261201";
+  let cabin_nicknames = JSON.parse(document.getElementById("cabin_nicknames").value);
+  let point_adders = JSON.parse(document.getElementById("point_adders").value);
+  function go() {
+    let output_data = "";
+    console.log("hi");
+    let inputBox = document.getElementById("input");
+    try {
+      let input = JSON.parse(inputBox.value);
+      console.log(input[0]);
+      for (comment in input) {
+        console.log(input[comment]);
+        let author = input[comment].author.username;
+        let comment_content = input[comment].content;
+        if (point_adders.includes(author) && comment_content[0] != "/") {
+          let comment_id = input[comment].id;
+          let comment_link = "https://scratch.mit.edu/projects/" + project_id + "/#comments-" + comment_id;
+          let comment_time = input[comment].datetime_created;
+          let parseCommentContent = comment_content.split(" ", 4);
+          console.log(parseCommentContent);
+          let username = "";
+          let points = "";
+          let cabin = "";
+          let reason = parseCommentContent[3];
+          if (parseCommentContent[0][0] == "@") {
+            username = parseCommentContent[0];
+          }
+          if (parseCommentContent[1][0] == "@") {
+            username = parseCommentContent[1];
+          }
+          if (parseCommentContent[2][0] == "@") {
+            username = parseCommentContent[2];
+          }
+          if (isNumeric(parseCommentContent[0])) {
+            points = parseCommentContent[0];
+          }
+          if (isNumeric(parseCommentContent[1])) {
+            points = parseCommentContent[1];
+          }
+          if (isNumeric(parseCommentContent[2])) {
+            points = parseCommentContent[2];
+          }
+          if (cabin_nicknames.hasOwnProperty(parseCommentContent[0])) {
+            cabin = parseCommentContent[0];
+            cabin = cabin_nicknames[cabin];
+          }
+          if (cabin_nicknames.hasOwnProperty(parseCommentContent[1])) {
+            cabin = parseCommentContent[1];
+            cabin = cabin_nicknames[cabin];
+          }
+          if (cabin_nicknames.hasOwnProperty(parseCommentContent[2])) {
+            cabin = parseCommentContent[2];
+            cabin = cabin_nicknames[cabin];
+          }
+          console.log(username);
+          console.log(points);
+          console.log(cabin);
+          let error_message = " ";
+          if (points == "" || username == "" || cabin == "") {
+            error_message = "missing parameter";
+          }
+          let save = comment_id + "	" + comment_time + "	" + author + "	" + username + "	" + cabin + "	" + points + "	" + reason + "	" + comment_content + "	" + error_message + "	" + comment_link + "\n";
+          output_data += save;
+          console.log(output_data);
+        }
+      }
+
+      let outputBox = document.getElementById("output")
+      outputBox.value = output_data;
+    }
+    catch {
+      window.alert("Error occured - check JSON formatting.")
+    }
+  }
+  function copy() {
+    button = document.getElementById("copy");
+    button.innerText = "COPY";
+    textarea = document.getElementById("output");
+    textarea.select();
+    textarea.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(textarea.value);
+    button.innerText = "COPIED";
+  }
+</script>
