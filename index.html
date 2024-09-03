@@ -194,12 +194,14 @@
           let comment_id = input[comment].id;
           let comment_link = "https://scratch.mit.edu/projects/" + project_id + "/#comments-" + comment_id;
           let comment_time = input[comment].datetime_created;
-          let parseCommentContent = comment_content.split(" ", 4);
-          console.log(parseCommentContent);
-          let username = "";
+          let parseCommentContent = comment_content.split(" ");
+                    let username = "";
           let points = "";
           let cabin = "";
-          let reason = parseCommentContent[3];
+          let reason = "";
+          for (let i = 3; i < parseCommentContent.length; i++) {
+            reason += parseCommentContent[i]+" ";
+          }
           if (parseCommentContent[0][0] == "@") {
             username = parseCommentContent[0];
           }
@@ -233,6 +235,7 @@
           console.log(username);
           console.log(points);
           console.log(cabin);
+          console.log(reason);
           let error_message = " ";
           if (points == "" || username == "" || cabin == "") {
             error_message = "missing parameter";
