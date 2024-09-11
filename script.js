@@ -7,9 +7,10 @@ function isNumeric(n) {
     }
   }
   let project_id = "551261201";
-  let cabin_nicknames = JSON.parse(document.getElementById("cabin_nicknames").value);
-  let point_adders = JSON.parse(document.getElementById("point_adders").value);
+  
   function go() {
+      let cabin_nicknames = JSON.parse(document.getElementById("cabin_nicknames").value);
+  let point_adders = JSON.parse(document.getElementById("point_adders").value);
     let output_data = "";
     console.log("hi");
     let inputBox = document.getElementById("input");
