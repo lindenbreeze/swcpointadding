@@ -80,6 +80,7 @@ function isNumeric(n) {
       outputBox.value = output_data;
     }
     catch {
+    let input = JSON.parse(inputBox.value);
       window.alert("Error occured - check JSON formatting.")
     }
   }
