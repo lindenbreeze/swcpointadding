@@ -7,18 +7,28 @@ function isNumeric(n) {
     }
   }
   let project_id = "551261201";
-  
+  function parseInput(str) {
+    let input = str.toLowerCase();
+    while (input.includes("  ")) {
+        input = input.replace("  ", " ");
+        };
+    return input.replace('\\n', '').replace("] [", ",").replace("][", ",");
+
+}
+
   function go() {
+      let double_adding = [];
+      const button = document.getElementById("copy");
+    button.innerText = "COPY";
+      let outputBox = document.getElementById("output")
+      outputBox.value = "";
       let cabin_nicknames = JSON.parse(document.getElementById("cabin_nicknames").value);
   let point_adders = JSON.parse(document.getElementById("point_adders").value);
     let output_data = "";
-    console.log("hi");
     let inputBox = document.getElementById("input");
     try {
-      let input = JSON.parse(inputBox.value);
-      console.log(input[0]);
+        let input = JSON.parse(parseInput(inputBox.value));
       for (comment in input) {
-        console.log(input[comment]);
         let author = input[comment].author.username;
         let comment_content = input[comment].content;
         if (point_adders.includes(author) && comment_content[0] != "/") {
@@ -63,26 +73,25 @@ function isNumeric(n) {
             cabin = parseCommentContent[2];
             cabin = cabin_nicknames[cabin];
           }
-          console.log(username);
-          console.log(points);
-          console.log(cabin);
-          console.log(reason);
+          let double_adding_output = username + " " + points + " " + cabin;
           let error_message = " ";
           if (points == "" || username == "" || cabin == "") {
-            error_message = "missing parameter";
-          }
+            error_message += "missing parameter ";
+          };
+          if (double_adding.includes(double_adding_output)) {
+              error_message += "possible double adding ";
+        };
+          double_adding.push(double_adding_output);
           let save = comment_id + "	" + comment_time + "	" + author + "	" + username + "	" + cabin + "	" + points + "	" + reason + "	" + comment_content + "	" + error_message + "	" + comment_link + "\n";
           output_data += save;
-          console.log(output_data);
         }
       }
 
-      let outputBox = document.getElementById("output")
       outputBox.value = output_data;
     }
     catch {
-    let input = JSON.parse(inputBox.value);
       window.alert("Error occured - check JSON formatting.")
+      JSON.parse(parseInput(inputBox.value))
     }
   }
   function copy() {
@@ -90,7 +99,7 @@ function isNumeric(n) {
     button.innerText = "COPY";
     textarea = document.getElementById("output");
     textarea.select();
-    textarea.setSelectionRange(0, 99999);
+    textarea.setSelectionRange(0, 99999999);
     navigator.clipboard.writeText(textarea.value);
     button.innerText = "COPIED";
   }
