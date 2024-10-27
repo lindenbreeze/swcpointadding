@@ -1,3 +1,26 @@
+"""
+INSTRUCTIONS
+
+Download this file and run it on your device. 
+You'll need to install python3, the python 
+requests module, and a python IDE (for something 
+like this where you're just running code, I 
+recommend IDLE3, it's pretty straightforward). 
+
+The program will ask you for the ID of a recently 
+added comment. You can get this from the spreadsheet.
+
+Once you enter that, it will get all the comments 
+from after that was commented. It will create a 
+file called pointaddingcomments.txt on your computer. 
+Open up pointaddingcomments.txt and copy-paste that 
+into the textbox on the website.
+
+Depending on your operating system and IDE, you may need
+to delete pointaddingcomments.txt from your computer
+before running the program again.
+"""
+
 import json, requests, time
 
 projectId = "551261201"
