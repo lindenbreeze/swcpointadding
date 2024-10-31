@@ -22,8 +22,6 @@ function isNumeric(n) {
     button.innerText = "COPY";
       let outputBox = document.getElementById("output")
       outputBox.value = "";
-      let cabin_nicknames = JSON.parse(document.getElementById("cabin_nicknames").value);
-  let point_adders = JSON.parse(document.getElementById("point_adders").value);
     let output_data = "";
     let inputBox = document.getElementById("input");
     try {
@@ -31,7 +29,7 @@ function isNumeric(n) {
       for (comment in input) {
         let author = input[comment].author.username;
         let comment_content = input[comment].content;
-        if (point_adders.includes(author) && comment_content[0] != "/") {
+        if (comment_content[0] != "/") {
           let comment_id = input[comment].id;
           let comment_link = "https://scratch.mit.edu/projects/" + project_id + "/#comments-" + comment_id;
           let comment_time = input[comment].datetime_created;
@@ -46,34 +44,31 @@ function isNumeric(n) {
           if (parseCommentContent[0][0] == "@") {
             username = parseCommentContent[0];
           }
+          else if (isNumeric(parseCommentContent[0])) {
+            points = parseCommentContent[0];
+          }
+          else {
+              cabin = parseCommentContent[0];
+          }
           if (parseCommentContent[1][0] == "@") {
             username = parseCommentContent[1];
+          }
+          else if (isNumeric(parseCommentContent[1])) {
+            points = parseCommentContent[1];
+          }
+          else {
+              cabin = parseCommentContent[1];
           }
           if (parseCommentContent[2][0] == "@") {
             username = parseCommentContent[2];
           }
-          if (isNumeric(parseCommentContent[0])) {
-            points = parseCommentContent[0];
-          }
-          if (isNumeric(parseCommentContent[1])) {
-            points = parseCommentContent[1];
-          }
-          if (isNumeric(parseCommentContent[2])) {
+          else if (isNumeric(parseCommentContent[2])) {
             points = parseCommentContent[2];
           }
-          if (cabin_nicknames.hasOwnProperty(parseCommentContent[0])) {
-            cabin = parseCommentContent[0];
-            cabin = cabin_nicknames[cabin];
+          else {
+              cabin = parseCommentContent[2];
           }
-          if (cabin_nicknames.hasOwnProperty(parseCommentContent[1])) {
-            cabin = parseCommentContent[1];
-            cabin = cabin_nicknames[cabin];
-          }
-          if (cabin_nicknames.hasOwnProperty(parseCommentContent[2])) {
-            cabin = parseCommentContent[2];
-            cabin = cabin_nicknames[cabin];
-          }
-          let double_adding_output = username + " " + points + " " + cabin;
+          let double_adding_output = username + " " + points;
           let error_message = " ";
           if (points == "" || username == "" || cabin == "") {
             error_message += "missing parameter ";
