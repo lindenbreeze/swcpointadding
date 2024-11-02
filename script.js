@@ -12,6 +12,12 @@ function isNumeric(n) {
     while (input.includes("  ")) {
         input = input.replace("  ", " ");
         };
+    if (input.includes("fairy tale")) {
+        input = input.replace("fairy tale", "fairytale");
+    }
+    if (input.includes("magical realism")) {
+        input = input.replace("magical realism", "magicalrealism");
+    }
     return input.replace('\\n', '').replace("] [", ",").replace("][", ",");
 
 }
