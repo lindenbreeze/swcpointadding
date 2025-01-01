@@ -47,6 +47,7 @@ function go() {
 				let comment_id = input[comment].id;
 				let comment_link = "https://scratch.mit.edu/projects/" + project_id + "/#comments-" + comment_id;
 				let comment_time = input[comment].datetime_created.toUpperCase();
+				let comment_time_unix = Math.floor(new Date(comment_time).getTime() / 1000);
 				let parseCommentContent = comment_content.split(" "); //split comment by spaces
 				let username = "";
 				let points = "";
@@ -87,16 +88,25 @@ function go() {
 					cabin = parseCommentContent[2];
 				}
 				// use username and point value to check for possible double adding
-				let double_adding_output = username + " " + points;
+				let double_adding_output = {
+					"camper": username,
+					"points": points,
+					"timestamp": comment_time_unix,
+					"comment_id": comment_id
+				};
 				let error_message = " ";
 				// if it didn't find a point value or a username, give missing parameter error
 				if (points == "" || username == "" || cabin == "") {
-					error_message += "missing parameter ";
+					error_message += "missing parameter; ";
 				};
 				// if another comment that is included in the input has the same username & point value as this comment, give possible double adding error
-				if (double_adding.includes(double_adding_output)) {
-					error_message += "possible double adding ";
-				};
+				for (comment_added of double_adding) {
+					if (comment_added["camper"] == username && comment_added["points"] == points) {
+						if (Math.abs(comment_added["timestamp"] - comment_time_unix) < 3600) {
+							error_message += "possible double adding (" + comment_added["comment_id"] + "); ";
+						}
+					}
+				}
 				// add comment to list to check for double adding
 				double_adding.push(double_adding_output);
 
@@ -110,7 +120,7 @@ function go() {
 		outputBox.value = output_data;
 	} catch {
 		// popup alert there is an error when parsing the input as JSON
-		window.alert("Error occured - check JSON formatting.")
+		window.alert("Error occured - check JSON formatting/browser console for error.")
 		// run function again so that the error message appears in the browser console
 		JSON.parse(parseInput(inputBox.value))
 	}
