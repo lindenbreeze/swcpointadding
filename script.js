@@ -101,7 +101,7 @@ function go() {
 				};
 				// if another comment that is included in the input has the same username & point value as this comment, give possible double adding error
 				for (comment_added of double_adding) {
-					if (comment_added["camper"] == username && comment_added["points"] == points) {
+					if (comment_added["camper"] == username && comment_added["points"] == points && comment_added["comment_id"] != comment_id) {
 						if (Math.abs(comment_added["timestamp"] - comment_time_unix) < 3600) {
 							error_message += "possible double adding (" + comment_added["comment_id"] + "); ";
 						}
