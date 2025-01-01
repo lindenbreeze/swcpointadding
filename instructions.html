@@ -2,162 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon"
-        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHlcmASZgNOAA0mtIwob78oSLwGP1PybjDQ&s" />
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>SWC Point Adding Instructions</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon"
+		href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHlcmASZgNOAA0mtIwob78oSLwGP1PybjDQ&s" />
+	<script src="script.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>SWC Point Adding</title>
 </head>
 
 <body>
-    <h1>Instructions</h1>
-    <h2>Updating Points</h2>
-    <ol>
-        <li>Get the point adding project comments from <a
-                href="https://api.scratch.mit.edu/users/chrysaIis/projects/551261201/comments?offset=0&limit=40"
-                target="_blank">the project comments API page</a> or using <a
-                href="https://trinket.io/python3/bb4247fe3525" target="_blank">this python program</a>.<br>
-            The API has the most recent 40 comments from the project. You can get to the next 40 by incrementing the
-            'offset' in the URL by 40.</li>
-        <ol type="a">
-            <li>Copy and paste the first 40 comments into the input box on the point adding
-                website. To get the comments from the API manually:
-            </li>
-            <li>Increment the offset in the URL by 40 to get to the next page of comments. Copy and paste this into the
-                box
-                right after the first 40 comments.<br>
-                Note that if you put more than one space or linebreak between the two groups of comments, it will break
-                the
-                website.<br>
-            </li>
-            <li>Continue incrementing the offset by 40 and adding the next 40 comments to the list until you have added
-                a
-                page that has a comment that has already been added.<br>
-                You can check this by getting a comment ID from the bottom of the spreadsheet and using
-                control+f to check if that comment is on this page.<br>
-            </li>
-        </ol>
-        <li>Press the "GO" button. <br>
-            This will convert the comments into a format that you can copy and paste into a spreadsheet. If something is
-            wrong with the input, a popup alert will appear. You can open the console in your browser after you dismiss
-            the alert to check what the error was. It will probably be something to do with formatting, so the error
-            will tell you the line number and character number of the error which can help you to fix it. (Note: for
-            this reason I'd suggest using a browser extension to make the comments API format with line breaks. This
-            makes it easier to find errors when they happen.) If you can't find the error, I'd recommend just trying to
-            get all the comments again and seeing if it works.
-        </li>
-        <li>
-            Press the "COPY" button and then paste it into the next empty row of the "Points Website Output" tab on the
-            spreadsheet, starting in column A.
-        </li>
-        <li>Check the Error column for errors and correct them. Errors will be highlighted in red.<br>
-            There are two types of errors that you can get:
-            <ul>
-                <li>Missing Parameter: This means that the program couldn't find the username, cabin, or point value.
-                    One of the cells in the row will be empty where the information is missing. You can check the
-                    Comment Content column to see if it's because there was a typo (e.g. misspelling the cabin, not
-                    putting an @ before the username) and find the missing parameter there. If you can't find it there,
-                    try going to the comment link and seeing if the point adder replied to the comment with any
-                    corrections. If not, check to see if they commented again and fixed it. If that's the case, delete
-                    the row with the error. If you haven't been able to find the missing parameter, you can either find
-                    the original comment in the Main Cabin yourself or ask the point adder to do it. Once you have the
-                    missing parameter, fill in the empty cell and delete the error in the error column.</li>
-                <li>Possible Double Adding: This means that the program thinks the same comment in the Main Cabin may
-                    have been commented on the point adding project twice (due to double commenting or two leaders
-                    adding at the same time). It detects this by finding comments that have the same username and point
-                    value, and were commented on the point adding project less than an hour apart. It will have the ID
-                    of the comment that it thinks may be a duplicate in parentheses. You can find this comment on the
-                    spreadsheet and determine if it actuallly was double-added. Keep in mind that if a daily has the
-                    same value as word wars/critiquitaire or if there were two dailies in a row with the same point
-                    value, you may get false positives. If you determine that double-adding did occur, delete the row
-                    with the error. If you determine that it didn't occur, delete the error message.</li>
-            </ul>
-            Make sure to delete the error message after you've resolved it so that it doesn't confuse other people
-            looking at the spreadsheet!
-        </li>
-        <li>Make sure the spreadsheet has accurately identified the point adders and cabin aliases.<br>Any commenters
-            who aren't in the point adders list will have their username highlighted in blue and any cabins that aren't
-            in the cabin alias list will have their name highlighted in blue. For commenters, this might mean that
-            someone who isn't a point adder commented on the project, but you should check to make sure it's not someone
-            whose username you misspelled who should be able to add points. For cabins, it probably means that the cabin
-            name is misspelled or the point adder used an alias that isn't on the list.</li>
-        <li>
-            Copy and paste the updated point values into the Main Cabin from the "MC DESC" tab of the spreadsheet.<br>
-            You can update the daily and weekly in the spreadsheet if you want to copy and paste the entire description,
-            or you can just copy the points part of the description. It has an auto-updating cell that will also include
-            when points were last updated in the description.
-        </li>
-    </ol>
-    <h2>Pre-Session Set-Up</h2>
-    <ul type="disc">
-        <li>Update the point adders list on the point adders tab of the spreadsheet. Make sure not to include any extra
-            spaces after the username or it will not recognize them as a leader.</li>
-        <li>Update the cabin alias list on the cabin aliases tab of the spreadsheet.
-            <ul type="circle">
-                <li>The aliases are different names that point adders can refer to cabins by (e.g. "scifi" and
-                    "sciencefiction"). They cannot have spaces in them. I like to include versions where the spaces
-                    are deleted, replaced with hyphens, and replaced with underscores, as well as any other
-                    abbreviations like "contemp" for "contemporary".
-                </li>
-                <li>Each cabin has one codename that is used to add up points.
-                </li>
-            </ul>
-        </li>
-        <li>Clear the filled in rows from the Points Website Output tab of the spreadsheet. Make sure to just delete the
-            contents of the cells, not the rows themselves.</li>
-        <li>Update the cabins in the standings tab of the spreadsheet. Edit the purple section on the right, not the
-            green section on the left.<ul type="circle">
-                <li>The cabin codename should match the codename in the cabin aliases list.</li>
-                <li>The cabin name is what you want to appear in the Main Cabin and can include any symbols you want.
-                </li>
-                <li>The points column should automatically update, but you can use the little blue circle in the corner
-                    to autofill any new rows you have to create.</li>
-                <li>Give TCTWNW negative points so that it always appears at the bottom of the standings.</li>
-                <li>The link should be the link to the cabin studio. Make sure it doesn't include /comments or /projects
-                    or anything at the end to save on space in the description.</li>
-                <li>The "what to call points" column is leftover from when we were calling Fan-Fi's points "kudos" in
-                    the description, so you can probably just leave everything as "points" unless there's another funny
-                    joke to be made.</li>
-                <li>Update cell A3 (in the green section, a message will pop up warning you not to edit it but you can
-                    just press OK) to reflect the correct number of cabins. It should be reading all the rows that are
-                    filled in in the purple section.</li>
-            </ul>
-        </li>
-        <li>Update the standings section of the MC DESC tab to have the right number of cabins.</li>
-        <li>Update the borders, credits, etc. in the MC DESC tab if you plan on copying the entire tab into the studio
-            description.</li>
-    </ul>
-    <h2>What Happens If.../Troubleshooting</h2>
-    <ul type="disc">
-        <li>What happens if someone comments on the project while I'm updating points?<ul>If you started from the first
-                page of comments (offset=0), a comment will end up on the spreadsheet twice, which is fine because the
-                spreadsheet will only count it once. If you started from lower, a comment will be skipped over. So make
-                sure to start with the most recent comments!</ul>
-        </li>
-        <li>What happens if a comment ends up on the spreadsheet multiple times?<ul>It's fine! The spreadsheet gets a
-                list of comment IDs and only counts each one once.</ul>
-        </li>
-        <li>The spreadsheet is loading really slowly :(<ul>You can hide some of the rows on the Points Website Output
-                tab or Points Processed tab and that should help. It will still count the points in those rows even
-                though you can't see them.</ul>
-        </li>
-        <li>What if someone who isn't a point adder comments on the project?<ul>Their comments will appear on the
-                spreadsheet but won't be counted because they aren't in the point adders list. Their username will show
-                up in blue on the Points Website Output tab but you don't have to do anything about it.</ul>
-        </li>
-        <li>I put someone on the point adders list but the spreadsheet isn't counting their comments! What's wrong?<ul>
-                Make sure you spelled their username correctly (uppercase I's and lowercase L's are correct, hyphens in
-                the right places, etc.) and that there aren't any extra spaces in the cell after their username.</ul>
-        </li>
-        <li>The point counts have stopped updating!!!!! How do I fix it????<ul>This probably means that the named ranges
-                aren't covering the entire range that points are in on the spreadsheet. You can get to the named ranges
-                using the search menu or the Data dropdown and then edit them. Make sure that they go all the way to the
-                bottom of the
-                spreadsheet. Don't edit the columns.</ul>
-        </li>
-    </ul>
-</body>
-
+	<div id="inputarea" class="area">
+		<p>Enter comments API info:</p>
+		<textarea id="input" rows="10""></textarea>
+			<br>
+			<button id=" go" onclick="go()">GO</button>
+		</div>
+		<br>
+		<div id="outputarea" class="area">
+			<textarea id="output" readonly rows="10"></textarea><br>
+		<button id="copy" onclick="copy()"">COPY</button>
+		</div>
+		</div>
+		<br>
+		<a href="./instructions.html" target="_blank">Instructions</a>
+	</body>
 </html>
